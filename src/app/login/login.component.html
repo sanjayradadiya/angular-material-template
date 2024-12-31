@@ -1,0 +1,74 @@
+<div class="login-container">
+  <div class="header-container">
+    <span class="header-title">Angular material template</span>
+    <div class="icon-container"></div>
+  </div>
+  <div class="form-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field
+        appearance="outline"
+        floatLabel="always"
+        class="input-style"
+      >
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="Enter your email"
+        />
+        <mat-error
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+          class="error-text"
+        >
+          Email is required and must be valid.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="outline"
+        floatLabel="always"
+        class="input-style"
+      >
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          placeholder="Enter your password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="togglePasswordVisibility()"
+          class="icon-btn"
+        >
+          <mat-icon>{{
+            isPasswordVisible ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+          class="error-text"
+        >
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" class="submit-btn">
+        Sign In
+      </button>
+    </form>
+
+    <div class="forgot-password">
+      <span>Don't remember your password?</span>
+      <div class="title" (click)="onForgot()">Forgot</div>
+    </div>
+  </div>
+</div>
